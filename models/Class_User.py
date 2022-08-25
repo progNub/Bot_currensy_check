@@ -45,8 +45,9 @@ class User(object):
 
     @staticmethod
     def check_unique(user_id):
-        check = f"(select * from users where id_telegram = '{user_id}');"
-        return bool(len(read_query(check)))
+        """Возвращает True если это уникальный пользователь """
+        check = f"(select * from user where id_telegram = '{user_id}');"
+        return not(bool(len(read_query(check))))
 
     @staticmethod
     def delete_user(id_user):

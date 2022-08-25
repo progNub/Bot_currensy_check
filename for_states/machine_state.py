@@ -4,9 +4,10 @@ from loader import dp
 
 
 class Currency(StatesGroup):
-    state_1 = State()
-    state_2 = State()
-    state_run = State()
+    write_byn_waiting = State()
+    write_usd_waiting = State()
+    write_eur_waiting = State()
+    write_rub_waiting = State()
 
 
 class Analitics(StatesGroup):

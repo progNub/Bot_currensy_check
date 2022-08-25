@@ -3,11 +3,17 @@ from aiogram.types import ReplyKeyboardRemove, \
     InlineKeyboardMarkup, InlineKeyboardButton
 
 analysis_two_row = [['Общая информация', 'Список записей'], ['Курсы валют', 'Вернуться']]
+
 start_two_row = [['Сделать запись ✍'], ['Аналитика 🧮', 'Информация ❓']]
-currency_two_row = [['USD', 'EUR'], ['RUB', 'Вернуться']]
+
+choice_currency = [['USD', 'EUR'], ['RUB', 'BYN'], ['Вернуться']]
+
+hide_choice_currency = [['#####', '#####'], ['#####', '#####'], ['Отмена ввода']]
+
 currency_two_row_state_2 = [['---', '---'], ['---', 'Вернуться']]
 
 myfin = [['Подробнее на myfin.by ', '', "https://myfin.by/currency/minsk"]]
+
 delete_writes_inline = [['Удалить записи', 'delete_writes'], ['Отменить', 'cancel']]
 
 
