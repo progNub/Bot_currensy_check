@@ -1,5 +1,6 @@
 from aiogram import types
 from aiogram.dispatcher import FSMContext  # для машины состояний
+from aiogram_calendar import simple_cal_callback, SimpleCalendar, dialog_cal_callback
 from for_states import Currency
 from models import User, Curs, Byn, Usd, Eur, Rub
 from for_requests import nbrb
@@ -191,3 +192,8 @@ async def get_all_currency(message: types.Message):
 async def menu_rates_currency(message: types.Message):
     if message.chat.type == "private":
         await message.answer("Меню курс валют:", reply_markup=keyboard.get_button_more_one_row(keyboard.rates_menu))
+
+
+async def get_curs_on_date(message: types.Message):
+    if message.chat.type == "private":
+        await message.answer("Введите дату:")

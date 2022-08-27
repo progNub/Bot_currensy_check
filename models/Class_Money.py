@@ -114,6 +114,7 @@ class Eur(Money):
     def get_last_record(user_id):
         return Money._get_last_record(user_id, EUR)
 
+
 def drop_all_currency():
     Rub.drop_table_money()
     Byn.drop_table_money()

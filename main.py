@@ -27,14 +27,17 @@ dp.register_message_handler(messages.main_menu, regexp='Вернуться')
 
 dp.register_message_handler(messages.get_all_currency, regexp='Общая информация')
 dp.register_message_handler(messages.get_sum_all_currency, regexp='Просмотр суммы')
+
 dp.register_message_handler(messages.menu_rates_currency, regexp='Курсы валют')
 dp.register_message_handler(messages.get_curr_today, regexp='Курс на сегодня')
+dp.register_message_handler(messages.get_curs_on_date, regexp='Курс на дату')
 
 
 
 dp.register_message_handler(messages.information, regexp='Информация ❓')
 
 # currency
+
 
 
 
