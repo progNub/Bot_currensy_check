@@ -25,8 +25,13 @@ dp.register_message_handler(messages.write_rub, state=Currency.write_rub_waiting
 dp.register_message_handler(messages.analysis, regexp='Аналитика 🧮')
 dp.register_message_handler(messages.main_menu, regexp='Вернуться')
 
+dp.register_message_handler(messages.get_all_currency, regexp='Общая информация')
+dp.register_message_handler(messages.get_sum_all_currency, regexp='Просмотр суммы')
+dp.register_message_handler(messages.menu_rates_currency, regexp='Курсы валют')
+dp.register_message_handler(messages.get_curr_today, regexp='Курс на сегодня')
 
-dp.register_message_handler(messages.get_curr, regexp='Курсы валют')
+
+
 dp.register_message_handler(messages.information, regexp='Информация ❓')
 
 # currency

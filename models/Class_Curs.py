@@ -1,8 +1,10 @@
 from databases import read_query, write_to_db
+from for_requests import nbrb
 
 
 class Curs(object):
     def __init__(self, RUB=0, USD=0, EUR=0):
+        """rub, usd, eur"""
         self.RUB = RUB
         self.USD = USD
         self.EUR = EUR
@@ -14,12 +16,12 @@ class Curs(object):
           rub FLOAT,
           usd FLOAT,
           eur FLOAT);"""
-        write_to_db(create_table_database)
+        return write_to_db(create_table_database)
 
     @staticmethod
     def drop_table_curs():
         sql_del = "drop table curs;"
-        write_to_db(sql_del)
+        return write_to_db(sql_del)
 
     @staticmethod
     def add_curs(curs):
@@ -28,6 +30,29 @@ class Curs(object):
         rub, usd, eur)
         VALUES (
         {curs.RUB}, {curs.USD}, {curs.EUR});"""
-        write_to_db(sql)
+        return write_to_db(sql)
+
+    @staticmethod
+    def get_last_all_curs():
+        sql = """SELECT * FROM curs ORDER BY ID DESC LIMIT 1"""
+        return read_query(sql)
+
+    @staticmethod
+    def get_last_curs_eur():
+        sql = """SELECT eur FROM curs ORDER BY ID DESC LIMIT 1"""
+        return read_query(sql)
+
+    @staticmethod
+    def get_last_curs_usd():
+        sql = """SELECT usd FROM curs ORDER BY ID DESC LIMIT 1"""
+        return read_query(sql)
+
+    @staticmethod
+    def get_last_curs_rub():
+        sql = """SELECT rub FROM curs ORDER BY ID DESC LIMIT 1"""
+        return read_query(sql)
+
+
+
 
 

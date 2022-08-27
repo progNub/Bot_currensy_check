@@ -1,19 +1,37 @@
 import requests
 import json
+import datetime
 
 file_name = "../databases/valuta.json"
 
 
-def get_rate(id_rate="431"):
+
+
+
+
+def get_rate_for_id_date(id_rate="431", date=datetime.date.today()):
+    """Returned type 'float'"""
     temp = '0000'
     try:
-        webpage = requests.get(f'https://www.nbrb.by/api/exrates/rates/{str(id_rate)}')
-        usd = webpage.json()
-        temp = usd.get('Cur_OfficialRate')
+        webpage = requests.get(f"https://www.nbrb.by/api/exrates/rates/{str(id_rate)}?ondate={date}")
+
+        money = webpage.json()
+        temp = money.get('Cur_OfficialRate')
     except:
         print(f'not answer from https://www.nbrb.by/api/exrates/rates/{str(id_rate)}')
     return temp
 
+
+def get_rate_usd(date=datetime.date.today()):
+    return get_rate_for_id_date(date=date)
+
+
+def get_rate_rub(date=datetime.date.today()):
+    return get_rate_for_id_date('456', date)
+
+
+def get_rate_eur(date=datetime.date.today()):
+    return get_rate_for_id_date('451', date)
 
 # def get_all_rates():
 #     temp = "0000"

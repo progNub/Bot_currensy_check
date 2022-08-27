@@ -1,125 +1,118 @@
 from databases import read_query, write_to_db
 
+BYN = 'byn'
+USD = 'usd'
+RUB = 'rub'
+EUR = 'eur'
 
-class Usd(object):
+
+class Money:
+
     def __init__(self, count=0):
         self.count = count
 
     @staticmethod
-    def create_table_money():
-        create_table_database = """CREATE TABLE usd (
-          id INT PRIMARY KEY AUTO_INCREMENT PRIMARY KEY,
-          user_id int not null,
-          count FLOAT,
-          CONSTRAINT usd_users_id_user_id_telegram
-            FOREIGN KEY (user_id) REFERENCES user (id_telegram)
-            ON DELETE CASCADE);"""
-        write_to_db(create_table_database)
+    def _create_table_money(str_name_table):
+        create_table_database = f"""CREATE TABLE {str_name_table} (
+              id INT PRIMARY KEY AUTO_INCREMENT PRIMARY KEY,
+              user_id int not null,
+              count FLOAT,
+              CONSTRAINT byn_users_id_user_id_telegram
+                FOREIGN KEY (user_id) REFERENCES user (id_telegram)
+                ON DELETE CASCADE);"""
+        return write_to_db(create_table_database)
 
     @staticmethod
-    def drop_table_money():
-        sql_del = "drop table usd;"
-        write_to_db(sql_del)
+    def _drop_table_money(str_name_table):
+        sql_del = f"drop table {str_name_table};"
+        return write_to_db(sql_del)
 
     @staticmethod
-    def add_money(user_id, money):
+    def _add_money(user_id, money, str_name_table):
         sql = f"""INSERT INTO
-        usd ( 
-        user_id, count)
-        VALUES (
-        {user_id},{money});"""
-        write_to_db(sql)
-
-
-class Rub(object):
-    def __init__(self, count=0):
-        self.count = count
+            {str_name_table} ( 
+            user_id, count)
+            VALUES (
+            {user_id},{money});"""
+        return write_to_db(sql)
 
     @staticmethod
-    def create_table_money():
-        create_table_database = """CREATE TABLE rub (
-          id INT PRIMARY KEY AUTO_INCREMENT PRIMARY KEY,
-          user_id int not null,
-          count FLOAT,
-          CONSTRAINT rub_users_id_user_id_telegram
-            FOREIGN KEY (user_id) REFERENCES user (id_telegram)
-            ON DELETE CASCADE);"""
-        write_to_db(create_table_database)
-
-    @staticmethod
-    def drop_table_money():
-        sql_del = "drop table rub;"
-        write_to_db(sql_del)
-
-    @staticmethod
-    def add_money(user_id, money):
-        sql = f"""INSERT INTO
-        rub ( 
-        user_id, count)
-        VALUES (
-        {user_id},{money});"""
-        write_to_db(sql)
+    def _get_last_record(user_id, str_name_table):
+        sql = f"""select count from {str_name_table} where user_id = {user_id} ORDER BY ID DESC LIMIT 1;"""
+        return read_query(sql)
 
 
-class Eur(object):
-    def __init__(self, count=0):
-        self.count = count
+class Byn(Money):
 
     @staticmethod
     def create_table_money():
-        create_table_database = """CREATE TABLE eur (
-          id INT PRIMARY KEY AUTO_INCREMENT PRIMARY KEY,
-          user_id int not null,
-          count FLOAT,
-          CONSTRAINT eur_users_id_user_id_telegram
-            FOREIGN KEY (user_id) REFERENCES user (id_telegram)
-            ON DELETE CASCADE);"""
-        write_to_db(create_table_database)
+        return Money._create_table_money(BYN)
 
     @staticmethod
     def drop_table_money():
-        sql_del = "drop table eur;"
-        write_to_db(sql_del)
+        return Money._drop_table_money(BYN)
 
     @staticmethod
     def add_money(user_id, money):
-        sql = f"""INSERT INTO
-        eur ( 
-        user_id, count)
-        VALUES (
-        {user_id},{money});"""
-        write_to_db(sql)
+        return Money._add_money(user_id, money, BYN)
+
+    @staticmethod
+    def get_last_record(user_id):
+        return Money._get_last_record(user_id, BYN)
 
 
-class Byn(object):
-    def __init__(self, count=0):
-        self.count = count
-
+class Usd(Money):
     @staticmethod
     def create_table_money():
-        create_table_database = """CREATE TABLE byn (
-          id INT PRIMARY KEY AUTO_INCREMENT PRIMARY KEY,
-          user_id int not null,
-          count FLOAT,
-          CONSTRAINT byn_users_id_user_id_telegram
-            FOREIGN KEY (user_id) REFERENCES user (id_telegram)
-            ON DELETE CASCADE);"""
-        write_to_db(create_table_database)
+        return Money._create_table_money(USD)
 
     @staticmethod
     def drop_table_money():
-        sql_del = "drop table byn;"
-        write_to_db(sql_del)
+        return Money._drop_table_money(USD)
 
     @staticmethod
     def add_money(user_id, money):
-        sql = f"""INSERT INTO
-        byn ( 
-        user_id, count)
-        VALUES (
-        {user_id},{money});"""
-        write_to_db(sql)
+        return Money._add_money(user_id, money, USD)
 
+    @staticmethod
+    def get_last_record(user_id):
+        return Money._get_last_record(user_id, USD)
+
+
+class Rub(Money):
+    @staticmethod
+    def create_table_money():
+        return Money._create_table_money(RUB)
+
+    @staticmethod
+    def drop_table_money():
+        return Money._drop_table_money(RUB)
+
+    @staticmethod
+    def add_money(user_id, money):
+        return Money._add_money(user_id, money, RUB)
+
+    @staticmethod
+    def get_last_record(user_id):
+        return Money._get_last_record(user_id, RUB)
+
+
+class Eur(Money):
+    @staticmethod
+    def create_table_money():
+        return Money._create_table_money(EUR)
+
+    @staticmethod
+    def drop_table_money():
+        return Money._drop_table_money(EUR)
+
+    @staticmethod
+    def add_money(user_id, money):
+        return Money._add_money(user_id, money, EUR)
+
+    @staticmethod
+    def get_last_record(user_id):
+        return Money._get_last_record(user_id, EUR)
 
 def drop_all_currency():
     Rub.drop_table_money()
