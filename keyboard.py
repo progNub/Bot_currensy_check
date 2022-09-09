@@ -2,10 +2,10 @@ from aiogram.types import ReplyKeyboardRemove, \
     ReplyKeyboardMarkup, KeyboardButton, \
     InlineKeyboardMarkup, InlineKeyboardButton
 
-
-
+start_admin_menu = [['Меню админа', 'Меню юзера']]
+admin_menu = [['Рассылка'], ['Вернуться']]
 start_two_row = [['Сделать запись ✍'], ['Аналитика 🧮', 'Информация ❓']]
-analysis_two_row = [['Общая информация', 'Просмотр суммы'], ['Курсы валют', 'Вернуться']]
+analysis_two_row = [['Общая информация', 'Просмотр суммы'], ['Курсы валют', 'Подписка'], ['Вернуться']]
 rates_menu = [['Курс на сегодня', 'Курс на дату'], ['Вернуться']]
 
 choice_currency = [['USD', 'EUR'], ['RUB', 'BYN'], ['Вернуться']]
@@ -42,10 +42,9 @@ def get_inline_buttons(namekeys):
     [0] -> text
     [1] ->callback_data
     [2] -> url
-    пример 1: str = [['text_1', 'callback_data_1'], ['text_2', 'callback_data_2']] -> без url
+    пример 1: str = [['text_1', callback_data='callback_data_1'], ['text_2', callback_data='callback_data_2']] -> без url
     пример 2: str = [['text', '', 'url']] -> без callback_data"""
     inline_keys = InlineKeyboardMarkup()
-    count = len(namekeys)
     for i in namekeys:
         btn = InlineKeyboardButton("null")
         if len(i) >= 0:

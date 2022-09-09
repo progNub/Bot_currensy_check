@@ -35,14 +35,36 @@ class User(object):
             is_bot,
             first_name,
             last_name,
-            username)
+            username,
+            subs)
             VALUES (
             {user.id},
             {user.is_bot},
             '{user.first_name}',
             '{user.last_name}',
-            '{user.username}');"""
+            '{user.username}',
+            {False});"""
         return write_to_db(sql)
+
+    @staticmethod
+    def subscribe(user_id):
+        sql = f"""select subs from user where id_telegram = {user_id}"""
+        subs = not (bool(read_query(sql)[0][0]))
+        sql = f"""update user set subs = {subs} where id_telegram = {user_id}"""
+        return write_to_db(sql)
+
+    @staticmethod
+    def check_subscribe(user_id):
+        """get True - subscriber or False - not subscriber"""
+        sql = f"""select subs from user where id_telegram = {user_id}"""
+        return bool(read_query(sql)[0][0])
+
+    @staticmethod
+    def get_list_subscrubers():
+        sql = f"""select id_telegram from user where subs = 1"""
+        return read_query(sql)
+
+
 
     @staticmethod
     def check_unique(user_id):
@@ -62,3 +84,4 @@ class User(object):
     @staticmethod
     def get_users_from_DB(key="*"):
         return User.get_users_by_key(key)
+

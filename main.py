@@ -2,14 +2,19 @@ import aiogram
 from aiogram import executor
 from aiogram.utils.exceptions import BotBlocked  # для ошибок телеги
 from aiogram.utils import exceptions
+
 from aiogram.dispatcher.filters import Command
-from for_states import Currency
+from for_states import Currency, Date_state
 import messages
 from loader import dp
 
 dp.register_message_handler(messages.start, Command('start'))
 
-#Операции с валютой
+# админ
+dp.register_message_handler(messages.admin, regexp='Меню админа')
+dp.register_message_handler(messages.main_menu, regexp='Меню юзера')
+
+# Операции с валютой
 dp.register_message_handler(messages.menu_write_money, regexp='Сделать запись ✍')
 dp.register_message_handler(messages.menu_write_money, regexp='Отмена ввода', state="*")
 dp.register_message_handler(messages.start_write_byn, regexp='BYN')
@@ -21,9 +26,12 @@ dp.register_message_handler(messages.write_usd, state=Currency.write_usd_waiting
 dp.register_message_handler(messages.write_eur, state=Currency.write_eur_waiting)
 dp.register_message_handler(messages.write_rub, state=Currency.write_rub_waiting)
 
-#Меню аналитики
+# Меню аналитики
 dp.register_message_handler(messages.analysis, regexp='Аналитика 🧮')
 dp.register_message_handler(messages.main_menu, regexp='Вернуться')
+
+dp.register_message_handler(callback=messages.menu_ubscribe, regexp='Подписка')
+dp.register_callback_query_handler(callback=messages.subscribe)
 
 dp.register_message_handler(messages.get_all_currency, regexp='Общая информация')
 dp.register_message_handler(messages.get_sum_all_currency, regexp='Просмотр суммы')
@@ -31,15 +39,11 @@ dp.register_message_handler(messages.get_sum_all_currency, regexp='Просмо�
 dp.register_message_handler(messages.menu_rates_currency, regexp='Курсы валют')
 dp.register_message_handler(messages.get_curr_today, regexp='Курс на сегодня')
 dp.register_message_handler(messages.get_curs_on_date, regexp='Курс на дату')
+dp.register_message_handler(messages.write_date, state=Date_state.write_date_waiting)
 
-
+dp.register_message_handler(messages.mailing, regexp='Рассылка')
 
 dp.register_message_handler(messages.information, regexp='Информация ❓')
-
-# currency
-
-
-
 
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True, on_startup=print("Бот запущен"))
