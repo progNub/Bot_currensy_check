@@ -195,7 +195,7 @@ async def get_all_currency(message: types.Message):
         eur = Eur.get_last_record(message.from_user.id)
         rub = Rub.get_last_record(message.from_user.id)
         byn = Byn.get_last_record(message.from_user.id)
-        await message.answer(f"BYN: {byn[0][0]}\nUSD: {usd[0][0]}\nEUR: {eur[0][0]}\nRUB: {rub[0][0]}")
+        await message.answer(f"BYN: {byn}\nUSD: {usd}\nEUR: {eur}\nRUB: {rub}")
 
 
 async def menu_rates_currency(message: types.Message):
