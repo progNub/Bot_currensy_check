@@ -65,8 +65,12 @@ async def main_menu(message: types.Message):
 
 async def information(message: types.Message):
     if message.chat.type == "private":
-        await message.answer("Этот бот сделал Roman",
-                             reply_markup=keyboard.get_button_more_one_row(keyboard.start_two_row))
+        if message.from_user.id == loader.admin:
+            await message.answer("Приветствую Админа",
+                                 reply_markup=keyboard.get_button_more_one_row(keyboard.start_admin_menu))
+        else:
+            await message.answer("Этот бот сделал Roman",
+                                 reply_markup=keyboard.get_button_more_one_row(keyboard.start_two_row))
 
 
 async def menu_write_money(message: types.Message, state: FSMContext):

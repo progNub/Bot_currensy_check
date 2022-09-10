@@ -58,7 +58,7 @@ class Byn(Money):
 
     @staticmethod
     def get_last_record(user_id):
-        result = Money._get_last_record(user_id, USD)
+        result = Money._get_last_record(user_id, BYN)
         if len(result) == 0:
             return 0
         else:
@@ -102,7 +102,7 @@ class Rub(Money):
 
     @staticmethod
     def get_last_record(user_id):
-        result = Money._get_last_record(user_id, USD)
+        result = Money._get_last_record(user_id, RUB)
         if len(result) == 0:
             return 0
         else:
@@ -124,7 +124,7 @@ class Eur(Money):
 
     @staticmethod
     def get_last_record(user_id):
-        result = Money._get_last_record(user_id, USD)
+        result = Money._get_last_record(user_id, EUR)
         if len(result) == 0:
             return 0
         else:
