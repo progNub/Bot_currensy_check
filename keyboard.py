@@ -4,6 +4,7 @@ from aiogram.types import ReplyKeyboardRemove, \
 
 start_admin_menu = [['Меню админа', 'Меню юзера']]
 admin_menu = [['Рассылка'], ['Вернуться']]
+
 start_two_row = [['Сделать запись ✍'], ['Аналитика 🧮', 'Информация ❓']]
 analysis_two_row = [['Общая информация', 'Просмотр суммы'], ['Курсы валют', 'Подписка'], ['Вернуться']]
 rates_menu = [['Курс на сегодня', 'Курс на дату'], ['Вернуться']]
@@ -18,7 +19,7 @@ delete_writes_inline = [['Удалить записи', 'delete_writes'], ['От
 
 def get_button_more_one_row(namekeys):
     """Созданно что бы было меньше кода при создании кнопок
-    аргумент функции должен быть вида ['Кнопка1', 'Кнопка2']"""
+    аргумент функции должен быть вида [['Кнопка1', 'Кнопка2'],['кнопка3','кнопка4']]"""
     keys = ReplyKeyboardMarkup(resize_keyboard=True)
     for i in namekeys:
         if len(i) == 1:
@@ -33,7 +34,6 @@ def get_button_more_one_row(namekeys):
             btn2 = KeyboardButton(i[1])
             btn3 = KeyboardButton(i[2])
             keys.add(btn1, btn2, btn3)
-
     return keys
 
 
@@ -42,8 +42,8 @@ def get_inline_buttons(namekeys):
     [0] -> text
     [1] ->callback_data
     [2] -> url
-    пример 1: str = [['text_1', callback_data='callback_data_1'], ['text_2', callback_data='callback_data_2']] -> без url
-    пример 2: str = [['text', '', 'url']] -> без callback_data"""
+    пример 1: str = [[text = 'text_1', callback_data='callback_data_1'], ['text_2', callback_data='callback_data_2']] -> без url
+    пример 2: str = [['text', callback_data='', url='url']] -> без callback_data"""
     inline_keys = InlineKeyboardMarkup()
     for i in namekeys:
         btn = InlineKeyboardButton("null")

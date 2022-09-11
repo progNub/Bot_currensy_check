@@ -1,23 +1,28 @@
-from models import User, Curs
-from models import Class_Money
+from models import Curs
+from models.model_User import UserManager
+from models.model_Money import Eur, Usd, Byn, Rub
+
+
+def drop_all_currency():
+    Rub.drop_table_money()
+    Byn.drop_table_money()
+    Eur.drop_table_money()
+    Usd.drop_table_money()
+
+
+def create_all_currency():
+    Rub.create_table_money()
+    Byn.create_table_money()
+    Eur.create_table_money()
+    Usd.create_table_money()
+
 
 Curs.drop_table_curs()
-Class_Money.drop_all_currency()
-User.drop_table_user()
+drop_all_currency()
+UserManager.drop_table_user()
 
 Curs.create_table_curs()
-User.create_database_table_users()
-Class_Money.create_all_currency()
+UserManager.create_database_table_users()
+create_all_currency()
 
 # Проверка работоспособности бд
-
-# user = User(id=12345678)
-# User.add_new_user(user)
-
-# Class_Money.Byn.add_money(user.id, money=100)
-# Class_Money.Eur.add_money(user.id, money=200)
-# Class_Money.Usd.add_money(user.id, money=300)
-# Class_Money.Rub.add_money(user.id, money=400)
-
-# curs = Curs()
-# Curs.add_curs(curs)
